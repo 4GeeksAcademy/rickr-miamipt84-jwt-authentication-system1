@@ -16,7 +16,7 @@
 // DONE - create logic to fetch user credentials to get a token
 //   DONE - create a fetch.js file
 //      DONE - will have a login function
-// create the logic for storeReducer to update the token and isSuccessfulLogin keys
+// DONE create the logic for storeReducer to update the token and isSuccessfulLogin keys
 // complete the useEffect to allow the user to the private page
 
 import { useState, useEffect } from "react";
@@ -36,7 +36,11 @@ export const Login = () => {
 
     // create useEffect to send the user to the /private route when
     // login is successful and a token is received
-    // useEffect()
+    useEffect(() => {
+        if (store.isLoginSuccessful) {
+            navigate('/private');
+        }
+    }, [store.isLoginSuccessful])
 
     return (
         <>

@@ -17,13 +17,30 @@ CORS(api)
 
 @api.route('/token', methods=['POST'])
 def generate_token():
+    #login credentials
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    
-    if email != "test" or password != "test":
-        return jsonify({"msg": "Bad email or password"}), 401
 
-    access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token)
+    # query the DB to check if the user email exists
+    email = email.lower()
+    user = User.query.filter_by(email=email).first()
+
+    # create a condition to check if the user does NOT exist OR if the password is incorrect
+    if user is None:
+        return jsonify({'message': 'Sorry! Email or password do not match.'}), 401
+    elif user is not None and user.password != password:
+        return jsonify({'message': 'Sorry! Email or password do not match.'}), 401
+    
+
+    # the user DOES exist and the email/password matches
+    access_token = create_access_token(identity=user.id)
+
+    response = {
+        'access_token': access_token,
+        'user_id': user.id,
+        'message': f'Welcome {user.email}!'
+    }
+
+    return jsonify(response), 200
 
 
