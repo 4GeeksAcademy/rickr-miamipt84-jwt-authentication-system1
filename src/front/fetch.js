@@ -80,3 +80,5 @@ export const signUp = async(email, password, dispatch) => {
     return data;
 
 }
+
+// create a logout button that clears the token from the store and the sessionStorage
