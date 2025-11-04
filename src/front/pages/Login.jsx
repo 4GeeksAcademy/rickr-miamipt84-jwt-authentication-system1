@@ -17,7 +17,7 @@
 //   DONE - create a fetch.js file
 //      DONE - will have a login function
 // DONE create the logic for storeReducer to update the token and isSuccessfulLogin keys
-// complete the useEffect to allow the user to the private page
+// DONE complete the useEffect to allow the user to the private page
 
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";

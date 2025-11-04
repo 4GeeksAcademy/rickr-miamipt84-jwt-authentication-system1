@@ -43,4 +43,31 @@ def generate_token():
 
     return jsonify(response), 200
 
+@api.route('/signup', methods=['POST'])
+def new_signup():
+    #login credentials
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
 
+    # query the DB to check if the email already exists
+    email = email.lower()
+    user = User.query.filter_by(email=email).first()
+
+    if user is not None and user.email == email:
+        response = {
+            "message": f'{user.email} already exists. Please log in.'
+        }
+        return jsonify(response), 403
+    
+    new_user = User()
+    new_user.email = email
+    new_user.password = password
+    new_user.is_active = True
+    db.session.add(new_user)
+    db.session.commit()
+
+    response = {
+        "message": f'{new_user.email} was successfully added! Please log in.'
+    }
+
+    return jsonify(response), 201
