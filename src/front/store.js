@@ -4,6 +4,7 @@ export const initialStore=()=>{
     isLoginSuccessful: false,
     message: '',
     isSignUpSuccessful: false,
+    isLoggedIn: false,
   }
 }
 
