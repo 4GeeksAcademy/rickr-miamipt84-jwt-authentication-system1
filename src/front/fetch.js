@@ -82,8 +82,6 @@ export const signUp = async(email, password, dispatch) => {
 }
 
 export const logout = (dispatch) => {
-    // DONE - remove the token from sessionStorage
-    // DONE - remove the token from the store
     sessionStorage.removeItem('token');
     dispatch({
         type: 'loggedOut',
@@ -96,5 +94,3 @@ export const logout = (dispatch) => {
     });
 }
 
-// DONE - create a logout button that clears the token from the store and the sessionStorage
-// DONE - logout needs to dispatch to the store to remove the token and also handle clearing the sessionstorage item

@@ -17,6 +17,7 @@ export default function storeReducer(store, action = {}) {
         ...store,
         token: token,
         isLoginSuccessful: isLoginSuccessful,
+        isLoggedIn: true,
       }
     }
     case 'successfulSignUp':
@@ -26,6 +27,17 @@ export default function storeReducer(store, action = {}) {
         ...store,
         message: message,
         isSignUpSuccessful: isSignUpSuccessful,
+      }
+    }
+    case 'loggedOut':
+    {
+      const { token, isLoginSuccessful, message, isLoggedIn } = action.payload;
+      return {
+        ...store,
+        token: token,
+        isLoginSuccessful: isLoginSuccessful,
+        message: message,
+        isLoggedIn: isLoggedIn,
       }
     }
     default:

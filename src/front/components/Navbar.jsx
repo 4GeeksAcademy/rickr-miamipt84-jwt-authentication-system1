@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-// create a logout function in fetch to perform the needed actions to log out a client
+import { logout } from "../fetch";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 
 export const Navbar = () => {
