@@ -25,8 +25,7 @@ def setup_commands(app):
 
     """ 
     This is an example command "insert-test-users" that you can run from the command line
-    by typing: $ flask insert-test-users 5
-    Note: 5 is the number of users to add
+    by typing: $ flask insert-test-users
     """
     @app.cli.command("insert-test-users") # name of our command
     def insert_test_users():
@@ -105,12 +104,15 @@ def setup_commands(app):
             new_invoice.invoice_date = invoices_list[x]['date']
             new_invoice.invoice_number = invoices_list[x]['number']
             new_invoice.invoice_amount = invoices_list[x]['amount']
+
+            print(new_invoice.serialize())
             
             # select a random user from the user table to assign them an invoice
             random_user_position = random.randint(0, len(user_list) - 1)
             user = User.query.filter_by(email = user_list[random_user_position]['email']).first()
             print(user)
             new_invoice.user_id = user.id
+            db.session.add(new_invoice)
             db.session.commit()
 
             print(f'Invoice {new_invoice.invoice_number} created for user {user.email}.')
